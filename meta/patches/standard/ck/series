@@ -1,0 +1,7 @@
+links/kernel-cache/small/3.10-sched-bfs-440.patch
+links/kernel-cache/small/preempt-desktop-tune.patch
+links/kernel-cache/small/hz-no_default_250.patch
+links/kernel-cache/small/hz-default_1000.patch
+links/kernel-cache/small/kconfig-expose_vmsplit_option.patch
+links/kernel-cache/small/ck1-version.patch
+links/kernel-cache/small/urw-locks.patch

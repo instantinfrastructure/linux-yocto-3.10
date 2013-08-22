@@ -1,0 +1,14 @@
+links/kernel-cache/features/edf/sched-add-sched_class-task_dead.patch
+links/kernel-cache/features/edf/sched-add-extended-scheduling-interface.patch
+links/kernel-cache/features/edf/sched-SCHED_DEADLINE-structures-implementation.patch
+links/kernel-cache/features/edf/sched-SCHED_DEADLINE-SMP-related-data-structures-log.patch
+links/kernel-cache/features/edf/sched-SCHED_DEADLINE-avg_update-accounting.patch
+links/kernel-cache/features/edf/sched-add-period-support-for-deadline-tasks.patch
+links/kernel-cache/features/edf/sched-add-schedstats-for-deadline-tasks.patch
+links/kernel-cache/features/edf/sched-add-latency-tracing-for-deadline-tasks.patch
+links/kernel-cache/features/edf/rtmutex-turn-the-plist-into-an-rb-tree.patch
+links/kernel-cache/features/edf/sched-drafted-deadline-inheritance-logic.patch
+links/kernel-cache/features/edf/sched-add-bandwidth-management-for-sched_dl.patch
+links/kernel-cache/features/edf/sched-make-dl_bw-a-sub-quota-of-rt_bw.patch
+links/kernel-cache/features/edf/sched-speed-up-dl-pushes-with-a-push-heap.patch
+links/kernel-cache/features/edf/sched-add-sched_dl-documentation.patch
