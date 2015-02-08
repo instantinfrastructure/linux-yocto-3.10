@@ -426,23 +426,25 @@ static void __init reserve_initrd(void)
 static void __init parse_setup_data(void)
 {
 	struct setup_data *data;
-	u64 pa_data, pa_next;
+	u64 pa_data;
 
 	pa_data = boot_params.hdr.setup_data;
 	while (pa_data) {
-		u32 data_len, map_len, data_type;
+		u32 data_len, map_len;
 
 		map_len = max(PAGE_SIZE - (pa_data & ~PAGE_MASK),
 			      (u64)sizeof(struct setup_data));
 		data = early_memremap(pa_data, map_len);
 		data_len = data->len + sizeof(struct setup_data);
-		data_type = data->type;
-		pa_next = data->next;
-		early_iounmap(data, map_len);
+		if (data_len > map_len) {
+			early_iounmap(data, map_len);
+			data = early_memremap(pa_data, data_len);
+			map_len = data_len;
+		}
 
-		switch (data_type) {
+		switch (data->type) {
 		case SETUP_E820_EXT:
-			parse_e820_ext(pa_data, data_len);
+			parse_e820_ext(data);
 			break;
 		case SETUP_DTB:
 			add_dtb(pa_data);
@@ -450,7 +452,8 @@ static void __init parse_setup_data(void)
 		default:
 			break;
 		}
-		pa_data = pa_next;
+		pa_data = data->next;
+		early_iounmap(data, map_len);
 	}
 }
 

@@ -296,8 +296,8 @@ config SENSORS_K10TEMP
 	  If you say yes here you get support for the temperature
 	  sensor(s) inside your CPU. Supported are later revisions of
 	  the AMD Family 10h and all revisions of the AMD Family 11h,
-	  12h (Llano), 14h (Brazos), 15h (Bulldozer/Trinity) and
-	  16h (Kabini) microarchitectures.
+	  12h (Llano), 14h (Brazos) and 15h (Bulldozer/Trinity)
+	  microarchitectures.
 
 	  This driver can also be built as a module.  If so, the module
 	  will be called k10temp.
@@ -837,6 +837,15 @@ config MSIC_GPADC
 	depends on INTEL_SCU_IPC
 	help
 	  Say Y here to enable MSIC GPADC driver on Intel Medfield Platform
+
+config INTEL_MCU
+	tristate "Intel generic MCU control interface"
+	help
+	  Say Y here to enable control interface for intel mcu
+
+	  This driver provide userspace tty interface for the control and
+	  message output.
+	  You could use normal read/write to complete those operation.
 
 config SENSORS_MAX1111
 	tristate "Maxim MAX1111 Serial 8-bit ADC chip and compatibles"
