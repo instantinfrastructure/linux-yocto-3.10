@@ -109,6 +109,7 @@ DEFINE_SSP_REG(SSITR, 0x0c)
 DEFINE_SSP_REG(SSDR, 0x10)
 DEFINE_SSP_REG(SSTO, 0x28)
 DEFINE_SSP_REG(SSPSP, 0x2c)
+DEFINE_SSP_REG(SSCR2, 0x40)
 DEFINE_SSP_REG(SSFS, 0x44)
 DEFINE_SSP_REG(SFIFOL, 0x68)
 
@@ -208,6 +209,8 @@ DEFINE_SSP_REG(GAFR1_U, 0x44);
 #define SSPSP_SFRMP      (1 << 2)    /* Serial Frame Polarity */
 #define SSPSP_SCMODE(x)  ((x) << 0)  /* Serial Bit Rate Clock Mode */
 
+#define SSCR2_CLK_DEL_EN (1 << 3)	/* Delay logic for capturing input data */
+
 /*
  * For testing SSCR1 changes that require SSP restart, basically
  * everything except the service and interrupt enables
@@ -219,11 +222,6 @@ DEFINE_SSP_REG(GAFR1_U, 0x44);
 				| SSCR1_IFS | SSCR1_STRF | SSCR1_EFWR \
 				| SSCR1_RFT | SSCR1_TFT | SSCR1_MWDS \
 				| SSCR1_SPH | SSCR1_SPO | SSCR1_LBM)
-
-/* add CS control call back feature to give user capability
-to control CS signal by themselves*/
-#define CS_DEASSERT	0
-#define CS_ASSERT		1
 
 struct callback_param {
 	void *drv_context;
@@ -301,6 +299,8 @@ struct ssp_drv_context {
 	unsigned long quirks;
 	u32 rx_fifo_threshold;
 
+	/* if CS_ACTIVE_HIGH, cs_assert == 1 else cs_assert == 0 */
+	int cs_assert;
 	int cs_change;
 	void (*cs_control)(u32 command);
 };
